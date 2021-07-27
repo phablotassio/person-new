@@ -1,0 +1,15 @@
+SET search_path TO "DBPERSON";
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+create table IF NOT EXISTS "TB_PHONE"
+  (
+      "ID_PHONE"  BIGSERIAL,
+      "ID_PERSON"  BIGSERIAL UNIQUE ,
+      "UUID"              VARCHAR(50) UNIQUE NOT NULL DEFAULT uuid_generate_v4(),
+      "NUMBER"      VARCHAR(12) NOT NULL,
+      "AREA_CODE"      BIGINT NOT NULL,
+      "DT_INCLUSION" TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY ("ID_PERSON") references "TB_PERSON" ("ID_PERSON"),
+      PRIMARY KEY ("ID_PHONE")
+  ) ;
